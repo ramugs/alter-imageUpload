@@ -25,6 +25,9 @@ module.exports = {
         50: "#FAFAFA",
         10: "#F9FAFB",
       },
+      red: {
+        600: "#DC2626",
+      },
     },
     screens: {
       "2xsm": "375px",

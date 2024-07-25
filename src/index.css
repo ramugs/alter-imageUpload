@@ -9,3 +9,27 @@
     font-family: "Noto+Sans", system-ui, sans-serif;
   }
 }
+
+
+input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #4338CA;
+}
+
+.scroll_bar::-webkit-scrollbar-track {
+  background-color: #ebeff5;
+  border-radius: 10px;
+}
+
+.scroll_bar::-webkit-scrollbar {
+  width: 0px;
+  height: 3px;
+  background-color: #ebeff5;
+  border-radius: 10px;
+}
+
+.scroll_bar::-webkit-scrollbar-thumb {
+  background-color: #91959d;
+  border-radius: 10px;
+}

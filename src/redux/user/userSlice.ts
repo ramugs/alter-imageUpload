@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUser, imageUpload } from "./userReducer";
+import { getUser, imageUpload, selectProfileImage } from "./userReducer";
 
 const getUserSlice = createSlice({
   name: "getUser",
@@ -74,3 +74,42 @@ const imageUploadSlice = createSlice({
 
 export const imageUploadReducer = imageUploadSlice.reducer;
 export const { resetImageUploadState } = imageUploadSlice.actions;
+
+
+
+const selectProfileImageSlice = createSlice({
+  name: "selectProfileImage",
+  initialState: {
+    status: "",
+    isLoading: false,
+    data: {},
+    error: {},
+  },
+  reducers: {
+    resetSelectProfileImageState: () => ({
+      status: "",
+      isLoading: false,
+      data: {},
+      error: {},
+    }),
+  },
+  extraReducers: (builder) => {
+    builder.addCase(selectProfileImage.pending, (state) => {
+      state.status = "pending";
+      state.isLoading = true;
+    });
+    builder.addCase(selectProfileImage.fulfilled, (state, { payload }) => {
+      state.status = "success";
+      state.data = payload;
+      state.isLoading = false;
+    });
+    builder.addCase(selectProfileImage.rejected, (state, { payload }: any) => {
+      state.status = "success";
+      state.error = payload.response;
+      state.isLoading = false;
+    });
+  },
+});
+
+export const selectProfileImageReducer = selectProfileImageSlice.reducer;
+export const { resetSelectProfileImageState } = selectProfileImageSlice.actions;

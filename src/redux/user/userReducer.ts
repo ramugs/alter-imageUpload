@@ -1,16 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import api from "../config";
 import axios from "axios";
+import { baseURL } from "../config";
 
 export const getUser = createAsyncThunk(
   "getUser",
   async (userID: string, { rejectWithValue }) => {
     try {
-      const response = await axios.get(
-        `https://alter-backend-1.onrender.com/api/v1/user/${userID}`
-      );
+      const response = await axios.get(`${baseURL}user/${userID}`);
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
+      if (error?.response?.status === 500) {
+        window.location.href = "/error-page";
+      }
       return rejectWithValue(error);
     }
   }
@@ -21,7 +22,7 @@ export const imageUpload = createAsyncThunk(
   async (data: { userID: string; formData: FormData }, { rejectWithValue }) => {
     try {
       const response = await axios.patch(
-        `https://alter-backend-1.onrender.com/api/v1/user/${data?.userID}`,
+        `${baseURL}user/${data?.userID}`,
         data?.formData,
         {
           headers: {
@@ -30,7 +31,33 @@ export const imageUpload = createAsyncThunk(
         }
       );
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
+      if (error?.response?.status === 500) {
+        window.location.href = "/error-page";
+      }
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const selectProfileImage = createAsyncThunk(
+  "selectProfileImage",
+  async (data: { userID: string; formData: FormData }, { rejectWithValue }) => {
+    try {
+      const response = await axios.patch(
+        `${baseURL}user/profile-image/${data?.userID}`,
+        data?.formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return response.data;
+    } catch (error: any) {
+      if (error?.response?.status === 500) {
+        window.location.href = "/error-page";
+      }
       return rejectWithValue(error);
     }
   }

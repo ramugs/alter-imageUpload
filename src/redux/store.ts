@@ -1,11 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-import { getUserReducer, imageUploadReducer } from "./user/userSlice";
+import {
+  getUserReducer,
+  imageUploadReducer,
+  selectProfileImageReducer,
+} from "./user/userSlice";
 
 export const store = configureStore({
   reducer: {
     getUser: getUserReducer,
     imageUpload: imageUploadReducer,
+    selectProfileImage: selectProfileImageReducer,
   },
 });
 

@@ -3,31 +3,35 @@ import RemoveIcon from "../../assests/icons/removeIcon.svg";
 
 type buttonProps = {
   type?: "button" | "submit" | "reset";
-  name: string;
+  name: string | JSX.Element;
   onclick?: () => void;
   disabled?: boolean;
+  padding?: string;
 };
 
 type buttonWithIconProps = {
   type?: "button" | "submit" | "reset";
-  name: string;
+  name: string | JSX.Element;
   onclick?: () => void;
   disabled?: boolean;
   icon?: string;
+  padding?: string;
 };
 
 type buttonIconProps = {
-    type?: "button" | "submit" | "reset";
-    onclick?: () => void;
-    disabled?: boolean;
-    icon?: string;
-  };
+  type?: "button" | "submit" | "reset";
+  onclick?: () => void;
+  disabled?: boolean;
+  icon?: string;
+  padding?: string;
+};
 
 export const PrimaryButton = ({
   type = "button",
   name,
   onclick,
   disabled = false,
+  padding = "py-3 px-5",
 }: buttonProps) => {
   return (
     <button
@@ -37,7 +41,7 @@ export const PrimaryButton = ({
         disabled
           ? "text-neutral-400 bg-neutral-100"
           : "text-white bg-indigo-700 hover:bg-indigo-800"
-      }  font-medium  shadow-2 rounded py-3 px-5  focus:outline-none focus:ring focus:ring-indigo-100`}
+      }  font-medium flex justify-center items-center shadow-2 rounded ${padding}  focus:outline-none focus:ring focus:ring-indigo-100 `}
       disabled={disabled}
     >
       {name}
@@ -50,6 +54,7 @@ export const SecondButton = ({
   name,
   onclick,
   disabled = false,
+  padding = "py-3 px-5",
 }: buttonProps) => {
   return (
     <button
@@ -59,7 +64,7 @@ export const SecondButton = ({
         disabled
           ? "text-neutral-400 bg-neutral-100"
           : "text-neutral-900 bg-white hover:bg-neutral-50 border border-neutral-200"
-      }   font-medium  shadow-2 rounded py-3 px-5  focus:outline-none focus:ring focus:ring-indigo-100`}
+      }   font-medium  shadow-2 rounded ${padding}  focus:outline-none focus:ring focus:ring-indigo-100 `}
       disabled={disabled}
     >
       {name}
@@ -73,6 +78,7 @@ export const IconWithButton = ({
   onclick,
   disabled = false,
   icon = DeleteIcon,
+  padding = "px-1",
 }: buttonWithIconProps) => {
   return (
     <button
@@ -82,7 +88,7 @@ export const IconWithButton = ({
         disabled
           ? "text-neutral-400"
           : "text-neutral-600 hover:text-neutral-900"
-      }   font-medium  rounded px-1 focus:outline-none focus:ring focus:ring-indigo-100`}
+      }   font-medium  rounded ${padding} focus:outline-none focus:ring focus:ring-indigo-100`}
       disabled={disabled}
     >
       <img src={icon} alt="Delete Icon" /> {name}
@@ -95,6 +101,7 @@ export const IconButton = ({
   onclick,
   disabled = false,
   icon = RemoveIcon,
+  padding = "p-1",
 }: buttonIconProps) => {
   const iconColor = disabled ? "#A3A3A3" : "#000000";
   return (
@@ -105,11 +112,15 @@ export const IconButton = ({
         disabled
           ? "text-neutral-400"
           : "text-neutral-600 hover:text-neutral-900"
-      }   font-medium  rounded p-1 focus:outline-none focus:ring focus:ring-indigo-100`}
+      }   font-medium  rounded ${padding} focus:outline-none focus:ring focus:ring-indigo-100`}
       disabled={disabled}
       style={{ "--icon-color": iconColor } as React.CSSProperties}
     >
-      <img src={icon} alt="Remove Icon" style={{ "--icon-color": iconColor } as React.CSSProperties}/>
+      <img
+        src={icon}
+        alt="Remove Icon"
+        style={{ "--icon-color": iconColor } as React.CSSProperties}
+      />
     </button>
   );
 };
