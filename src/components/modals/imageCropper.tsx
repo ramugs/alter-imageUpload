@@ -139,7 +139,7 @@ const ImageCropperModal = ({
             </span>
           </div>
         ) : (
-          <div className="sm:w-[350px] w-[100vw] h-[350px] bg-neutral-950 my-5">
+          <div className="sm:w-[350px] w-[100vw] h-[350px] bg-neutral-950 my-5 flex justify-center">
             <ReactCrop
               crop={crop}
               circularCrop
