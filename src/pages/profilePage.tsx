@@ -42,7 +42,9 @@ export type UserProps = {
 };
 
 const ProfilePage = () => {
-  const userID = "66a1318a9d05c4d39a19c4c2";
+  // const userID = "66a1318a9d05c4d39a19c4c2";
+  const userID = "66a2555f00d63f358ce6f3ea";
+
   const dispatch = useAppDispatch();
   const userDetailsRes = useSelector((data: any) => data?.getUser);
   const [user, setUser] = useState<UserProps>();
