@@ -20,6 +20,7 @@ import { sizeFormatter } from "../../utils/sizeFormatter";
 import ImageCropperModal from "./imageCropper";
 import errorToast from "../../utils/errorToast";
 import { useNavigate } from "react-router-dom";
+import { characterHidder } from "../../utils/characterHidder";
 
 type modalProps = {
   isVisible: boolean;
@@ -49,7 +50,7 @@ const ImageUploadModal = ({ isVisible, onclose, userID }: modalProps) => {
   });
 
   useEffect(() => {
-    // api call using custom hook 
+    // api call using custom hook
     fetchFn();
   }, [reload, isVisible]);
 
@@ -269,7 +270,7 @@ const ImageUploadModal = ({ isVisible, onclose, userID }: modalProps) => {
                     <div className="flex flex-col justify-between ps-3">
                       <div className="flex flex-col ">
                         <span className="text-16 font-semibold text-neutral-900">
-                          {item?.filename}
+                          {characterHidder(item?.filename)}
                         </span>
                         <span className="text-12 font-normal text-neutral-600">
                           {sizeFormatter(item?.size)}
