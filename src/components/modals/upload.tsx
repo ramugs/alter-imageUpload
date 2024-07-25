@@ -72,6 +72,7 @@ const ImageUploadModal = ({ isVisible, onclose, userID }: modalProps) => {
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const maxNumber = 5 - (userData?.images?.length || 0);
+    const maxSize = 5 * 1024 * 1024;
     const files = e.target.files;
     if (files) {
       if (files?.length > maxNumber) {
@@ -81,6 +82,15 @@ const ImageUploadModal = ({ isVisible, onclose, userID }: modalProps) => {
             : "You've reached the image limit"
         );
         return;
+      }
+
+      for (let i = 0; i < files.length; i++) {
+        if (files[i].size > maxSize) {
+          errorToast(
+            `File size should not exceed 5 MB. File ${files[i].name} is too large.`
+          );
+          return;
+        }
       }
       const formData = new FormData();
       Array.from(files).forEach((file) =>
@@ -103,6 +113,7 @@ const ImageUploadModal = ({ isVisible, onclose, userID }: modalProps) => {
     e.preventDefault();
 
     const maxNumber = 5 - (userData?.images?.length || 0);
+    const maxSize = 5 * 1024 * 1024;
     const files = e.dataTransfer.files;
     if (files) {
       if (files?.length > maxNumber) {
@@ -112,6 +123,14 @@ const ImageUploadModal = ({ isVisible, onclose, userID }: modalProps) => {
             : "You've reached the image limit"
         );
         return;
+      }
+      for (let i = 0; i < files.length; i++) {
+        if (files[i].size > maxSize) {
+          errorToast(
+            `File size should not exceed 5 MB. File ${files[i].name} is too large.`
+          );
+          return;
+        }
       }
       const formData = new FormData();
       Array.from(files).forEach((file) =>
